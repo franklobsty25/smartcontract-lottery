@@ -27,7 +27,8 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     vrfCoordinatorV2Address = vrfCoordinatorV2Mock.target;
     const transactionResponse = await vrfCoordinatorV2Mock.createSubscription();
     const transactionReceipt = await transactionResponse.wait(1);
-    subscriptionId = transactionReceipt.events[0].args.subId;
+    // subscriptionId = transactionReceipt.events[0].args.subId;
+    subscriptionId = networkConfig[chainId]['subscriptionId']
     // Fund the subscription
     // Usually, you'd need the link token on a real network
     await vrfCoordinatorV2Mock.fundSubscription(
